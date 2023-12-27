@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import React, {useState} from 'react';
+
+  const App = () => {
+    // Sample data for the table
+    const [tableData, setTableData] = useState([
+      { id: 1, name: 'John Doe', Email: 'john@gmail.com' },
+      { id: 2, name: 'Jane Doe', Email: 'Jane@gmail.com' },
+      { id: 3, name: 'Bob Smith', Email: 'Bob@gmail.com' },
+    ]);
+  
+    // Function to render table headers dynamically
+    const renderTableHeaders = () => {
+      return Object.keys(tableData[0]).map((key, index) => (
+        <th key={index}>{key}</th>
+      ));
+    };
+  
+    // Function to render table rows dynamically
+    const renderTableRows = () => {
+      return tableData.map((row, index) => (
+        <tr key={index}>
+          {Object.values(row).map((value, index) => (
+            <td key={index}>{value}</td>
+          ))}
+        </tr>
+      ));
+    };
+  
+    return (
+      <div>
+        <h1>Dynamic Table Example</h1>
+        <table>
+          <thead>
+            <tr>{renderTableHeaders()}</tr>
+          </thead>
+          <tbody>{renderTableRows()}</tbody>
+        </table>
+      </div>
+    );  
 }
 
 export default App;
